@@ -1,0 +1,611 @@
+/* ============================================
+   CV FORGE — MAIN STYLESHEET
+   Responsive | Mobile-first | Print-ready
+   ============================================ */
+
+:root {
+  --accent: #1a3c5e;
+  --accent-light: #2d6a9f;
+  --gold: #c9a84c;
+  --gold-light: #f0d98e;
+  --bg: #f4f1ec;
+  --bg-panel: #ffffff;
+  --bg-form: #faf9f7;
+  --text: #1c1c1c;
+  --text-muted: #6b6b6b;
+  --text-light: #999;
+  --border: #e0dbd2;
+  --shadow: 0 4px 24px rgba(26, 60, 94, 0.10);
+  --radius: 14px;
+  --cv-accent: #1a3c5e;
+  --cv-gold: #c9a84c;
+  --cv-text: #1c1c1c;
+  --cv-muted: #555;
+  --cv-bg: #ffffff;
+  --cv-section-gap: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- HEADER ---- */
+.site-header {
+  background: var(--accent);
+  color: white;
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.5px;
+}
+.logo-icon { color: var(--gold); font-size: 1.3rem; }
+.logo-text strong { color: var(--gold-light); }
+.tagline {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  font-weight: 300;
+}
+
+/* ---- MAIN LAYOUT ---- */
+.main-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  flex: 1;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* ---- FORM PANEL ---- */
+.form-panel {
+  background: var(--bg-form);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.form-scroll {
+  overflow-y: auto;
+  height: 100%;
+  padding: 24px 24px 100px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.form-section {
+  margin-bottom: 28px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.optional {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-light);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-group input,
+.form-group textarea,
+textarea {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 0.88rem;
+  font-family: 'DM Sans', sans-serif;
+  background: white;
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  resize: vertical;
+}
+.form-group input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(45, 106, 159, 0.12);
+}
+
+/* ---- PHOTO UPLOAD ---- */
+.photo-upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.photo-preview-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid var(--border);
+  background: #f0ede8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.photo-preview-wrapper:hover { border-color: var(--accent-light); }
+#photoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 9px;
+}
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-light);
+  font-size: 0.78rem;
+}
+.photo-icon { font-size: 2rem; }
+.hidden-input { display: none; }
+.btn-upload {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-upload:hover { background: var(--accent-light); }
+.photo-hint { font-size: 0.72rem; color: var(--text-light); text-align: center; }
+
+/* ---- DYNAMIC BLOCKS (Experience, Education, Cert) ---- */
+.dynamic-block {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.dynamic-block .form-grid { gap: 10px; }
+.btn-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fee2e2;
+  color: #c0392b;
+  border: none;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-add {
+  background: transparent;
+  border: 1.5px dashed var(--accent-light);
+  color: var(--accent-light);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  width: 100%;
+  transition: background 0.2s;
+}
+.btn-add:hover { background: rgba(45, 106, 159, 0.06); }
+
+/* ---- DOWNLOAD SECTION ---- */
+.download-section {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+.btn-download {
+  background: linear-gradient(135deg, var(--gold) 0%, #e8c060 100%);
+  color: var(--accent);
+  border: none;
+  border-radius: 10px;
+  padding: 14px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(201, 168, 76, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(201, 168, 76, 0.5);
+}
+.download-hint {
+  margin-top: 10px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* ---- PREVIEW PANEL ---- */
+.preview-panel {
+  background: #e8e4dc;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.preview-toolbar {
+  background: var(--accent);
+  color: rgba(255,255,255,0.85);
+  padding: 10px 24px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn-preview-dl {
+  background: var(--gold);
+  color: var(--accent);
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.preview-scroll {
+  overflow-y: auto;
+  flex: 1;
+  padding: 32px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  scrollbar-width: thin;
+}
+
+/* ---- CV PAGE ---- */
+.cv-page {
+  background: white;
+  width: 100%;
+  max-width: 720px;
+  min-height: 1000px;
+  padding: 48px 48px 60px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+  border-radius: 4px;
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--cv-text);
+}
+
+/* ---- CV HEADER ROW ---- */
+.cv-header-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 18px;
+  position: relative;
+}
+.cv-name-block {
+  flex: 1;
+  min-width: 0;
+}
+.cv-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--cv-accent);
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.cv-role {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--cv-gold);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+.cv-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 0.78rem;
+  color: var(--cv-muted);
+}
+.cv-contacts span { white-space: nowrap; }
+
+/* ---- PHOTO FRAME ON CV ---- */
+.cv-photo-slot {
+  flex-shrink: 0;
+}
+.cv-photo-frame {
+  width: 105px;
+  height: 105px;
+  border-radius: 10%; /* ~10px rounded on 105px */
+  overflow: hidden;
+  border: 3px solid var(--cv-gold);
+  box-shadow:
+    0 0 0 5px rgba(201, 168, 76, 0.15),
+    0 8px 24px rgba(26, 60, 94, 0.22),
+    0 2px 8px rgba(0,0,0,0.12);
+  background: #f0ede8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#cvPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.cv-photo-empty {
+  font-size: 0.7rem;
+  color: #bbb;
+  text-align: center;
+}
+
+/* ---- CV DIVIDER ---- */
+.cv-divider {
+  height: 3px;
+  background: linear-gradient(90deg, var(--cv-accent) 60%, var(--cv-gold) 100%);
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+/* ---- CV SECTIONS ---- */
+.cv-section {
+  margin-bottom: var(--cv-section-gap);
+}
+.cv-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cv-accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--cv-gold);
+}
+.cv-summary-text {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--cv-muted);
+}
+.cv-placeholder {
+  font-size: 0.8rem;
+  color: #ccc;
+  font-style: italic;
+}
+
+/* ---- CV EXPERIENCE / EDUCATION ENTRIES ---- */
+.cv-entry {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0ede8;
+}
+.cv-entry:last-child { border-bottom: none; margin-bottom: 0; }
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+.cv-entry-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--cv-text);
+}
+.cv-entry-date {
+  font-size: 0.76rem;
+  color: var(--cv-gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.cv-entry-subtitle {
+  font-size: 0.8rem;
+  color: var(--cv-muted);
+  margin-bottom: 5px;
+  font-style: italic;
+}
+.cv-entry-desc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--cv-muted);
+  white-space: pre-line;
+}
+
+/* ---- CV SKILLS ---- */
+.cv-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cv-skill-tag {
+  background: rgba(26, 60, 94, 0.07);
+  color: var(--cv-accent);
+  border: 1px solid rgba(26, 60, 94, 0.15);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.77rem;
+  font-weight: 500;
+}
+
+/* ---- CERT ENTRY ---- */
+.cv-cert-entry {
+  font-size: 0.83rem;
+  margin-bottom: 5px;
+  color: var(--cv-muted);
+}
+.cv-cert-name { font-weight: 600; color: var(--cv-text); }
+
+/* ---- UTILITIES ---- */
+.hidden { display: none !important; }
+
+/* ---- MOBILE TOGGLE ---- */
+.mobile-toggle-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--accent);
+  padding: 10px 16px;
+  gap: 8px;
+  z-index: 200;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.2);
+}
+.toggle-btn {
+  flex: 1;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 10px 8px;
+  font-size: 0.82rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-btn.active {
+  background: var(--gold);
+  color: var(--accent);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+
+/* ============================================
+   PRINT STYLES — PDF Output
+   ============================================ */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  body * { visibility: hidden; }
+  .cv-page, .cv-page * { visibility: visible; }
+  .cv-page {
+    position: fixed;
+    top: 0; left: 0;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm 18mm 20mm 18mm;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  .site-header,
+  .form-panel,
+  .preview-toolbar,
+  .mobile-toggle-bar { display: none !important; }
+  .cv-name { font-size: 1.8rem; }
+  .cv-photo-frame {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET & MOBILE
+   ============================================ */
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+  .form-panel {
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-scroll {
+    height: auto;
+    max-height: none;
+    padding-bottom: 80px;
+  }
+  .preview-panel { height: auto; }
+  .preview-scroll { padding: 16px; }
+  .cv-page { padding: 32px 28px; }
+  .cv-name { font-size: 1.5rem; }
+  .mobile-toggle-bar { display: flex; }
+  /* Panel switching on mobile */
+  .form-panel.hidden-mobile { display: none; }
+  .preview-panel.hidden-mobile { display: none; }
+}
+
+@media (max-width: 480px) {
+  .site-header { padding: 12px 16px; }
+  .logo { font-size: 1.2rem; }
+  .tagline { display: none; }
+  .form-scroll { padding: 16px 14px 100px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  .cv-page { padding: 20px 16px; }
+  .cv-name { font-size: 1.3rem; }
+  .cv-photo-frame { width: 80px; height: 80px; }
+  .cv-contacts { font-size: 0.72rem; }
+    }
+  
