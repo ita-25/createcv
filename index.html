@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV Forge — Professional CV Generator</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">CV<strong>Forge</strong></span>
+      </div>
+      <p class="tagline">Build your professional CV in minutes — free, no sign-up.</p>
+    </div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <main class="main-layout">
+
+    <!-- LEFT: FORM PANEL -->
+    <section class="form-panel" id="formPanel">
+      <div class="form-scroll">
+
+        <!-- PHOTO UPLOAD -->
+        <div class="form-section photo-section">
+          <h3 class="section-title">Passport Photo</h3>
+          <div class="photo-upload-area" id="photoUploadArea">
+            <div class="photo-preview-wrapper" id="photoPreviewWrapper">
+              <img id="photoPreview" src="" alt="Preview" class="hidden"/>
+              <div class="photo-placeholder" id="photoPlaceholder">
+                <span class="photo-icon">👤</span>
+                <span>Upload Photo</span>
+              </div>
+            </div>
+            <input type="file" id="photoInput" accept="image/*" class="hidden-input"/>
+            <button class="btn-upload" onclick="document.getElementById('photoInput').click()">Choose Photo</button>
+            <p class="photo-hint">JPG or PNG · Recommended: square crop</p>
+          </div>
+        </div>
+
+        <!-- PERSONAL INFO -->
+        <div class="form-section">
+          <h3 class="section-title">Personal Information</h3>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Full Name</label>
+              <input type="text" id="fullName" placeholder="e.g. John Adebayo Okafor" oninput="updatePreview()"/>
+            </div>
+            <div class="form-group">
+              <label>Job Title / Role</label>
+              <input type="text" id="jobTitle" placeholder="e.g. Software Engineer" oninput="updatePreview()"/>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="email" placeholder="you@email.com" oninput="updatePreview()"/>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" id="phone" placeholder="+234 800 000 0000" oninput="updatePreview()"/>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="location" placeholder="Lagos, Nigeria" oninput="updatePreview()"/>
+            </div>
+            <div class="form-group">
+              <label>LinkedIn / Portfolio</label>
+              <input type="text" id="linkedin" placeholder="linkedin.com/in/yourname" oninput="updatePreview()"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROFESSIONAL SUMMARY -->
+        <div class="form-section">
+          <h3 class="section-title">Professional Summary</h3>
+          <textarea id="summary" rows="4" placeholder="Write a short 3–5 sentence overview of your experience, skills and what you bring to the table..." oninput="updatePreview()"></textarea>
+        </div>
+
+        <!-- WORK EXPERIENCE -->
+        <div class="form-section">
+          <h3 class="section-title">Work Experience</h3>
+          <div id="experienceList"></div>
+          <button class="btn-add" onclick="addExperience()">+ Add Experience</button>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="form-section">
+          <h3 class="section-title">Education</h3>
+          <div id="educationList"></div>
+          <button class="btn-add" onclick="addEducation()">+ Add Education</button>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="form-section">
+          <h3 class="section-title">Skills</h3>
+          <div class="form-group full">
+            <label>List your skills (comma separated)</label>
+            <input type="text" id="skills" placeholder="e.g. HTML, CSS, JavaScript, React, Figma, Communication" oninput="updatePreview()"/>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="form-section">
+          <h3 class="section-title">Certifications <span class="optional">(optional)</span></h3>
+          <div id="certList"></div>
+          <button class="btn-add" onclick="addCert()">+ Add Certification</button>
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="form-section">
+          <h3 class="section-title">Languages <span class="optional">(optional)</span></h3>
+          <div class="form-group full">
+            <label>Languages spoken</label>
+            <input type="text" id="languages" placeholder="e.g. English (Fluent), Yoruba (Native)" oninput="updatePreview()"/>
+          </div>
+        </div>
+
+        <!-- REFERENCES -->
+        <div class="form-section">
+          <h3 class="section-title">References <span class="optional">(optional)</span></h3>
+          <div class="form-group full">
+            <textarea id="references" rows="2" placeholder='e.g. "Available on request" or list specific referees...' oninput="updatePreview()"></textarea>
+          </div>
+        </div>
+
+        <!-- DOWNLOAD BUTTON -->
+        <div class="form-section download-section">
+          <button class="btn-download" onclick="downloadCV()">
+            <span class="btn-icon">⬇</span> Download CV as PDF
+          </button>
+          <p class="download-hint">Your CV will open as a print-ready PDF. Press <strong>Ctrl+P</strong> → Save as PDF.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT: LIVE PREVIEW PANEL -->
+    <section class="preview-panel" id="previewPanel">
+      <div class="preview-toolbar">
+        <span>Live Preview</span>
+        <button class="btn-preview-dl" onclick="downloadCV()">⬇ Download PDF</button>
+      </div>
+      <div class="preview-scroll">
+        <div class="cv-page" id="cvPage">
+
+          <!-- CV HEADER SECTION -->
+          <div class="cv-header-row" id="cvHeaderRow">
+            <!-- Photo slot: absolutely positioned to the right -->
+            <div class="cv-photo-slot" id="cvPhotoSlot">
+              <div class="cv-photo-frame" id="cvPhotoFrame">
+                <img id="cvPhotoImg" src="" alt="Passport Photo" class="hidden"/>
+                <div class="cv-photo-empty" id="cvPhotoEmpty">
+                  <span>Photo</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cv-name-block">
+              <h1 class="cv-name" id="cvName">Your Full Name</h1>
+              <p class="cv-role" id="cvRole">Job Title / Role</p>
+              <div class="cv-contacts" id="cvContacts">
+                <span id="cvEmail">📧 email@example.com</span>
+                <span id="cvPhone">📞 +000 000 0000</span>
+                <span id="cvLocation">📍 City, Country</span>
+                <span id="cvLinkedin">🔗 linkedin.com/in/you</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-divider"></div>
+
+          <!-- SUMMARY -->
+          <div class="cv-section" id="cvSummarySection">
+            <h2 class="cv-section-title">Professional Summary</h2>
+            <p class="cv-summary-text" id="cvSummary">Your professional summary will appear here...</p>
+          </div>
+
+          <!-- EXPERIENCE -->
+          <div class="cv-section" id="cvExperienceSection">
+            <h2 class="cv-section-title">Work Experience</h2>
+            <div id="cvExperienceList">
+              <p class="cv-placeholder">Add your work experience using the form.</p>
+            </div>
+          </div>
+
+          <!-- EDUCATION -->
+          <div class="cv-section" id="cvEducationSection">
+            <h2 class="cv-section-title">Education</h2>
+            <div id="cvEducationList">
+              <p class="cv-placeholder">Add your education using the form.</p>
+            </div>
+          </div>
+
+          <!-- SKILLS -->
+          <div class="cv-section" id="cvSkillsSection">
+            <h2 class="cv-section-title">Skills</h2>
+            <div class="cv-skills-grid" id="cvSkillsList">
+              <span class="cv-skill-tag">Your skills appear here</span>
+            </div>
+          </div>
+
+          <!-- CERTIFICATIONS -->
+          <div class="cv-section hidden" id="cvCertSection">
+            <h2 class="cv-section-title">Certifications</h2>
+            <div id="cvCertList"></div>
+          </div>
+
+          <!-- LANGUAGES -->
+          <div class="cv-section hidden" id="cvLangSection">
+            <h2 class="cv-section-title">Languages</h2>
+            <p id="cvLanguages"></p>
+          </div>
+
+          <!-- REFERENCES -->
+          <div class="cv-section hidden" id="cvRefSection">
+            <h2 class="cv-section-title">References</h2>
+            <p id="cvReferences"></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOBILE PREVIEW TOGGLE -->
+  <div class="mobile-toggle-bar">
+    <button class="toggle-btn active" id="btnForm" onclick="showPanel('form')">📝 Form</button>
+    <button class="toggle-btn" id="btnPreview" onclick="showPanel('preview')">👁 Preview</button>
+    <button class="toggle-btn" onclick="downloadCV()">⬇ PDF</button>
+  </div>
+
+  <script src="Js/app.js"></script>
+</body>
+</html>
+  
